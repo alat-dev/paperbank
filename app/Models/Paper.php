@@ -28,12 +28,12 @@ class Paper extends Model
             return $query->where('title','like','%'.$search.'%')
             ->orWhere('description','like','%'.$search.'%');
         });
-
+        
         $query->when($filters['category_id']??false,function($query,$category){
             return $query->where('category_id',$category);
             }
         );
-
+      
         $query->when($filters['course_id']??false,function($query,$course){
             return $query->where('course_id',$course);
         });

@@ -32,6 +32,10 @@ class PaperController extends Controller
             'user' => auth()->user(),
             'page_title' => "Search for Papers",
             'papers' => Paper::latest()->filter(request(['search','category_id','year','university_id','course_id']))->paginate(20),
+            'universities' => University::orderBy('name')->get(),
+            'fo_s' => FoS::orderBy('name')->get(),
+            'courses' => Course::orderBy('name')->get(),
+            'categories' =>Category::orderBy('name')->get(),
         ]);
     }
 
