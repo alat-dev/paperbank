@@ -21,9 +21,10 @@ class LoginController extends Controller
 
     public function registerIndex(){
         return view('register',[
-            'title' => 'Register Page',
+            'page_title' => 'Register Page',
             'universities' => University::orderBy('name')->get(),
             'fo_s' => FoS::orderBy('name')->get(),
+
         ]);
     }
 

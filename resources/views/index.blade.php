@@ -18,7 +18,7 @@
   
   <main>
   
-    <div data-aos="fade-up" id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -81,7 +81,7 @@
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
   
-    <div data-aos="fade-up" class="container marketing">
+    <div  class="container marketing">
   
       <!-- Three columns of text below the carousel -->
       <div class="row">
