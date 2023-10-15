@@ -28,7 +28,11 @@ Route::get('/try', function(){
     return view('jumbotron');
 });
 
-Route::get('/createpaper',[PaperController::class,'viewCreate']);
+Route::get('/papers/create',[PaperController::class,'viewCreate']);
 
-Route::post('/createpaper',[PaperController::class,'create']);
+Route::post('/papers/create',[PaperController::class,'create']);
 Route::get('/papers/{paper}', [PaperController::class, 'show']);
+Route::get('/users/{user:username}',[PaperController::class, 'showPaperList']);
+Route::get('/papers/{paper}/edit',[PaperController::class,'edit']);
+Route::post('/papers/{paper}/edit',[PaperController::class,'update']);
+Route::get('/papers/{paper}/delete',[PaperController::class,'destroy']);

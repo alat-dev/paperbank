@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
+    @if (session()->get('success_message')!= null)
+        <div class="alert alert-success alert-dismissible fade show " role="alert">
+        <strong>{{ session()->get('success_message') }}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif  
+    @if (session()->get('failed_message')!= null)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ session()->get('failed_message') }}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif 
     @yield('container')
 </body>
 

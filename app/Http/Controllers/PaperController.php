@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Models\FoS;
 use App\Models\University;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PaperController extends Controller
@@ -55,20 +56,29 @@ class PaperController extends Controller
         $validate = $request->validate([
             'title' => 'required|max:255|string',
             'university_id' => 'required|int',
-            'fos_id' => 'required|int',
             'course_id' => 'required|int',
             'category_id' => 'required|int',
             'year' => 'required|int',
+            'pdf_file' => 'file|required'
             
         ]);
 
         
         $validate["user_id"] = auth()->user()->id;
-        $validate["view_count"]=$validate["like_count"] =$validate["dislike_count"] =0;
+        $validate["view_count"] = $validate["like_count"] = $validate["dislike_count"] = 0;
         $validate["pdf_file"] = $request->file('pdf_file')->store('papers_pdf');
 
         Paper::create($validate);
         return redirect()->intended('/');
+    }
+
+    public function showPaperList(User $user){
+
+        return view('profile',[
+            "user_id" => $user->id,
+            "page_title" => $user->name.' Paper',
+            "papers" =>Paper::whereBelongsTo($user)->get()
+        ]);
     }
 
     /**
@@ -92,7 +102,8 @@ class PaperController extends Controller
     {
         return view('paper', [
             "paper" => $paper,
-            "page_title" => "Paper ".$paper->title
+            "page_title" => "Paper ".$paper->title,
+           
         ]
         );
     }
@@ -104,8 +115,17 @@ class PaperController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Paper $paper)
-    {
-        //
+    {   
+        return view('edit',[
+            'paper' => $paper,
+            'page_title' => 'Edit Paper',   
+            'user' => auth()->user(),
+            'page_title' => 'Create Paper',
+            'universities' => University::orderBy('name')->get(),
+            'fo_s' => FoS::orderBy('name')->get(),
+            'courses' => Course::orderBy('name')->get(),
+            'categories' =>Category::orderBy('name')->get(),
+        ]);
     }
 
     /**
@@ -115,9 +135,36 @@ class PaperController extends Controller
      * @param  \App\Models\Paper  $paper
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePaperRequest $request, Paper $paper)
-    {
-        //
+    public function update(Request $request, Paper $paper)
+    {   
+        
+        $validate = $request->validate([
+        'title' => 'required|max:255|string',
+        'university_id' => 'required|int',
+        'course_id' => 'required|int',
+        'category_id' => 'required|int',
+        'year' => 'required|int',
+        ]);
+
+    
+        $validate["user_id"] = auth()->user()->id;
+        $validate["view_count"]= $paper->view_count;
+        $validate["like_count"]= $paper->like_count;
+        $validate["dislike_count"] = $paper->dislike_count;
+        // dd($validate);
+        if($request["pdf_file"] != null){
+            $validate["pdf_file"] = $request->file('pdf_file')->store('papers_pdf');
+        } else {
+            $validate["pdf_file"] = $paper->pdf_file;
+        }
+
+        
+
+        if(Paper::where('id',$paper->id)->update($validate)){
+            return redirect('/')->with('success_message', 'Update successful');
+        } else {
+            return redirect('/')->with('failed_message', 'Update failed');
+        };
     }
 
     /**
@@ -127,7 +174,13 @@ class PaperController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Paper $paper)
-    {
-        //
+    {  
+        // dd(auth()->user()->id, $paper->user_id);    
+        if(auth()->user()->id != $paper->user_id) abort(404);
+        if(Paper::destroy($paper->id)){
+            return redirect('/users/'.auth()->user()->username)->with('success_message', 'Paper deleted');
+        } else {
+            return redirect('/users/'.auth()->user()->username)->with('failed_message', 'Failed to delete');
+        }
     }
 }

@@ -20,10 +20,10 @@
               @auth
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ $user->name }}
+                  {{ auth()->user()->name }}
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">My Paper</a></li>
+                  <li><a class="dropdown-item" href="/users/{{ auth()->user()->username }}">My Paper</a></li>
                   <li><a class="dropdown-item" href="">Downloaded Paper</a></li>
                   <li><a class="dropdown-item" href="/logout">Logout</a></li>
                 </ul>

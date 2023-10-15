@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId("user_id");
             $table->foreignId("category_id");
             $table->foreignId("course_id");
+            $table->foreignId("university_id");
             $table->string("title");
             $table->integer('year');
             $table->integer('view_count');

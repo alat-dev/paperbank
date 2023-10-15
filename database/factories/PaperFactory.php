@@ -27,6 +27,7 @@ class PaperFactory extends Factory
             'dislike_count' => mt_rand(1,100),
             'user_id' => mt_rand(1,10),
             'category_id' => mt_rand(1,3),
+            'university_id' => mt_rand(1,3),
             'course_id' => mt_rand(1,3)
         ];
     }
