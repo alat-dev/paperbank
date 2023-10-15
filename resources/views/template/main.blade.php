@@ -19,12 +19,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif  
-    @if (session()->get('failed_message')!= null)
+    {{-- @if (session()->get('failed_message')!= null)
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>{{ session()->get('failed_message') }}</strong> 
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif 
+    @endif  --}}
     @yield('container')
 </body>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

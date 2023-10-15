@@ -8,12 +8,12 @@
 </div>
 @endif
 
-@if (session()->get('register_success')!= null)
+{{-- @if (session()->get('register_success')!= null)
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>{{ session()->get('login_failed') }}</strong>
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
-@endif
+@endif --}}
 
 <div class="row">
     <div class="space col-md-3 col-xs-0">
@@ -34,7 +34,7 @@
                       <label for="exampleInputPassword1" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                     </div>
-                    <div>                    <small> Don't have account? <a href="/register"> Resgiter now </a> </small>
+                    <div>                    <small> Don't have account? <a href="/register"> Register now </a> </small>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
