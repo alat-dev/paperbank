@@ -28,7 +28,8 @@ class PaperFactory extends Factory
             'user_id' => mt_rand(1,10),
             'category_id' => mt_rand(1,3),
             'university_id' => mt_rand(1,3),
-            'course_id' => mt_rand(1,3)
+            'course_id' => mt_rand(1,3),
+            'description'=>fake()->sentence(20)
         ];
     }
 }

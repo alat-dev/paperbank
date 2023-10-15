@@ -21,6 +21,14 @@
                         <label class="form-label">Title</label>
                         <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"  value ="{{ old('title') }}"required>
                        </div>
+
+                       <div class="mb-3">
+                        <div class="form-floating">
+                            <div class="form-label">Description</div>
+                            <textarea class="form-control" name="description" placeholder="Leave a comment here" id="floatingTextarea" value={{ old('description') }}></textarea>
+                            
+                          </div>                       
+                        </div>
                        <div class="mb-3">
                         <label class="form-label ">Category</label>
                        <select class="form-select form-control @error('category_id') is-invalid @enderror" name="category_id" list="datalistOptions">

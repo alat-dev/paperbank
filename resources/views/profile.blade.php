@@ -16,18 +16,16 @@
                 <div class="fw-bold">{{ $paper->title }}</div>
                 Authorized by {{ $paper->user->name}}
             </div>
-            {{-- </a> --}}
+            </a>
         @auth
             @if (auth()->user()->id == $user_id)
-            
             <a href="/papers/{{ $paper->id }}/edit"><button type="button" class="btn btn-primary" type="submit"><i class="bi bi-pen"></i> Edit </button>
             </a>
-            <a  class ="mx-2" href="/papers/{{ $paper->id }}/delete"><button type="button" class="btn btn-danger" type="submit"><i class="bi bi-trash"></i></button>
+            <a  class ="mx-2"onclick="return confirm('Are you sure to delete {{ $paper->title }}?')" href="/papers/{{ $paper->id }}/delete"><button type="button" class="btn btn-danger" type="submit"><i class="bi bi-trash"></i></button>
             </a>
-            @else
-            <span class="badge bg-primary rounded-pill">{{ $paper->view_count }}  <i class="bi bi-eye"></i> </span>
             @endif
         @endauth
+        <span class="badge bg-primary rounded-pill">{{ $paper->view_count }} <i class="bi bi-eye"></i> </span>
         </li>
    
     @endforeach

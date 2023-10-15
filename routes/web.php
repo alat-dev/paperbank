@@ -36,3 +36,6 @@ Route::get('/users/{user:username}',[PaperController::class, 'showPaperList']);
 Route::get('/papers/{paper}/edit',[PaperController::class,'edit']);
 Route::post('/papers/{paper}/edit',[PaperController::class,'update']);
 Route::get('/papers/{paper}/delete',[PaperController::class,'destroy']);
+Route::get('/carousel', function(){
+    return view('carousel',['page_title'=>'coba']);
+});

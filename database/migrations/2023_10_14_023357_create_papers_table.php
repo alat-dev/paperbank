@@ -21,10 +21,11 @@ return new class extends Migration
             $table->foreignId("course_id");
             $table->foreignId("university_id");
             $table->string("title");
+            $table->string("description")->default('');
             $table->integer('year');
-            $table->integer('view_count');
-            $table->integer('like_count');
-            $table->integer('dislike_count');
+            $table->integer('view_count')->default(0);
+            $table->integer('like_count')->default(0);
+            $table->integer('dislike_count')->default(0);
             // $table->string('subject');
             $table->string("pdf_file");
             

@@ -13,4 +13,7 @@ class Category extends Model
         'name'
     ];
 
+    public function paper(){
+        return $this->hasMany(Paper::class);
+    }
 }

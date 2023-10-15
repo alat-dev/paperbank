@@ -27,11 +27,11 @@ class PaperController extends Controller
         ]);
     }
 
-    public function viewPapers(){
+    public function viewPapers(Request $request){
         return view('papers',[
             'user' => auth()->user(),
             'page_title' => "Search for Papers",
-            'papers' => Paper::paginate(10),
+            'papers' => Paper::latest()->filter(request(['search','category_id','year','university_id','course_id']))->paginate(20),
         ]);
     }
 
@@ -59,17 +59,21 @@ class PaperController extends Controller
             'course_id' => 'required|int',
             'category_id' => 'required|int',
             'year' => 'required|int',
-            'pdf_file' => 'file|required'
-            
+            'pdf_file' => 'file|required',
+            'description' => 'string'
         ]);
-
         
+        $validate["description"] = $request->description;
         $validate["user_id"] = auth()->user()->id;
         $validate["view_count"] = $validate["like_count"] = $validate["dislike_count"] = 0;
-        $validate["pdf_file"] = $request->file('pdf_file')->store('papers_pdf');
+        if($validate["pdf_file"] = $request->file('pdf_file')->store('papers_pdf')){
+            Paper::create($validate);
+            return redirect()->intended('/');
+        };
 
-        Paper::create($validate);
-        return redirect()->intended('/');
+        return redirect()->back();
+        // dd($validate["description"]);
+        
     }
 
     public function showPaperList(User $user){
@@ -77,7 +81,7 @@ class PaperController extends Controller
         return view('profile',[
             "user_id" => $user->id,
             "page_title" => $user->name.' Paper',
-            "papers" =>Paper::whereBelongsTo($user)->get()
+            "papers" =>Paper::whereBelongsTo($user)->paginate(20)
         ]);
     }
 
@@ -146,7 +150,7 @@ class PaperController extends Controller
         'year' => 'required|int',
         ]);
 
-    
+        $validate["description"] = $request->description;
         $validate["user_id"] = auth()->user()->id;
         $validate["view_count"]= $paper->view_count;
         $validate["like_count"]= $paper->like_count;
@@ -154,7 +158,7 @@ class PaperController extends Controller
         // dd($validate);
         if($request["pdf_file"] != null){
             $validate["pdf_file"] = $request->file('pdf_file')->store('papers_pdf');
-        } else {
+        } else {    
             $validate["pdf_file"] = $paper->pdf_file;
         }
 

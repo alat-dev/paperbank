@@ -11,4 +11,12 @@ class University extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function paper(){
+        return $this->hasMany(Paper::class);
+    }
+
+    public function user(){
+        return $this->hasMany(User::class);
+    }
 }
