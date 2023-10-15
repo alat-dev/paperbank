@@ -14,7 +14,7 @@
           </li>           
         
         </ul>
-
+        
         <ul class="navbar-nav" align="right">
             <li class="nav-item">
               @auth

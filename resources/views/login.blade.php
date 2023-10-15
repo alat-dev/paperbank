@@ -1,10 +1,25 @@
 @extends('template.main')
 @section('container')
+
+@if (session()->get('register_success')!= null)
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{ session()->get('register_success') }}</strong> 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
+@if (session()->get('register_success')!= null)
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>{{ session()->get('login_failed') }}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="row">
-    <div class="space col-3">
+    <div class="space col-md-3 col-xs-0">
 
     </div>
-    <div class="space col-6">
+    <div class="space col-md-6 col-xs-12">
         <div class="card m-2">
             <div class="card-body">
                 <h5 class="card-title"> Log In</h5>
@@ -31,7 +46,7 @@
 
         </div>
     </div>
-    <div class="space col-3">
+    <div class="space col-md-3 col-xs-12">
 
     </div>
 

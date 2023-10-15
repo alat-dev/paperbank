@@ -18,6 +18,11 @@ class Paper extends Model
         'like_count',
         'dislike_count',
         'user_id',
-        'category_id'
+        'category_id',
+        'course_id',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

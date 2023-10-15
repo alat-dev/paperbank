@@ -18,12 +18,13 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignId("user_id");
             $table->foreignId("category_id");
+            $table->foreignId("course_id");
             $table->string("title");
             $table->integer('year');
             $table->integer('view_count');
             $table->integer('like_count');
             $table->integer('dislike_count');
-            $table->string('subject');
+            // $table->string('subject');
             $table->string("pdf_file");
             
         });

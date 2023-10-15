@@ -18,3 +18,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PaperController::class,'index']);
 // Route::get('/login',[LoginController])
 Route::get('/login',[LoginController::class,'loginIndex']);
+Route::get('/register',[LoginController::class,'registerIndex']);
+Route::post('/register',[LoginController::class,'register']);
+Route::post('/login',[LoginController::class,'login']);
+Route::get('/logout',[LoginController::class,'logout']);
+Route::get('/papers',[PaperController::class,'viewPapers']);
+Route::get('/try', function(){
+
+    return view('jumbotron');
+});
+
+Route::get('/createpaper',[PaperController::class,'viewCreate']);
+
+Route::post('/createpaper',[PaperController::class,'create']);
+Route::get('/papers/{paper}', [PaperController::class, 'show']);
