@@ -24,7 +24,7 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/users/{{ auth()->user()->username }}"><i class="bi bi-newspaper"></i> My Paper</a></li>
-                  <li><a class="dropdown-item" href=""><i class="bi bi-paperclip"></i> Upload Paper</a></li>
+                  <li><a class="dropdown-item" href="/papers/create"><i class="bi bi-paperclip"></i> Upload Paper</a></li>
                   <li><a class="dropdown-item" href="/logout" onclick="return confirm('Are you sure?')"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
                 </ul>
               </div>
